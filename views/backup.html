@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        .sub-topic {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<form action="/category" method="post">
+    <div class="form-group">
+        <label>Do you have diabetes?</label>
+        <input type="radio" name="diabetes" id="diabetes-yes" value="yes"> Yes
+       <input type="radio" name="diabetes" id="diabetes-no" value="no"> No
+
+    </div>
+
+    <div id="diabetes-info" class="hidden">
+        <div class="form-group" id="years-suffered">
+            <label>Number of years suffered from diabetes:</label>
+            <input type="text" id="years-suffered" name="years-suffered">
+        </div>
+        
+        <div class="sub-topic">
+            <label>BMI (Body Mass Index):</label>
+            <input type="number" id="bmi" name="bmi">
+        </div>
+     
+        <div class="sub-topic">
+            <label>HBA:</label>
+            <input type="number" id="hba" name="hba">
+        </div>
+
+        <div class="sub-topic">
+            <label>Glucose:</label>
+            <input type="number" id="glucose" name="glucose">
+        </div>
+
+        <label>Do you have any eye defects?</label>
+        <input type="text" id="eye-defects-input" name="eye-defects">
+
+        <div class="sub-topic">
+            <label>Do you experience any of the following vision-related symptoms?</label>
+            <input type="checkbox" id="blurry-vision" name="vision-symptoms" value="blurry-vision"> Blurry vision<br>
+            <input type="checkbox" id="floating-images" name="vision-symptoms" value="floating-images"> Images floating<br>
+            <input type="checkbox" id="redness-eyes" name="vision-symptoms" value="redness-eyes"> Redness in eyes<br>
+            <input type="checkbox" id="dark-spot-vision" name="vision-symptoms" value="dark-spot-vision"> Dark spots in vision<br>
+        </div>
+    </div>
+
+    <div class="sub-topic" id="eye-defects" class="hidden">
+        <label>Do you have any eye defects?</label>
+        <input type="text" id="eye-defects-input" name="eye-defects">
+        <div class="sub-topic">
+            <label>Do you experience any of the following vision-related symptoms?</label>
+            <input type="checkbox" id="blurry-vision" name="vision-symptoms" value="blurry-vision"> Blurry vision<br>
+            <input type="checkbox" id="floating-images" name="vision-symptoms" value="floating-images"> Images floating<br>
+            <input type="checkbox" id="redness-eyes" name="vision-symptoms" value="redness-eyes"> Redness in eyes<br>
+            <input type="checkbox" id="dark-spot-vision" name="vision-symptoms" value="dark-spot-vision"> Dark spots in vision<br>
+        </div>
+    </div>
+
+    <button type="submit" onclick="setDiabetesValues()">Submit</button>
+</form>
+
+<script>
+    document.getElementById('diabetes-info').classList.add('hidden');
+    document.getElementById('eye-defects').classList.add('hidden');
+
+    document.getElementById('diabetes-yes').addEventListener('click', function(){
+        document.getElementById('diabetes-info').classList.remove('hidden');
+        document.getElementById('eye-defects').classList.add('hidden');
+    });
+
+    document.getElementById('diabetes-no').addEventListener('click', function() {
+    document.getElementById('diabetes-info').classList.add('hidden');
+    document.getElementById('eye-defects').classList.remove('hidden');
+    //calculatePossibility();
+    resetFields();
+});
+
+
+
+    function setDiabetesValues() {
+        let yes=document.getElementById('diabetes-yes').checked;
+         let no=document.getElementById('diabetes-no').checked;
+        if(yes){
+
+        
+        document.getElementById('years-suffered').value = ''; // You need to set this value as per your application
+        
+        // Calculate BMI
+        var bmiValue = document.getElementById('bmi').value;
+        var bmiMessage = '';
+        if (bmiValue < 18.5 || bmiValue > 24.9) {
+           // bmiMessage = "BMI indicates higher risk for diabetic retinopathy.";
+            alert("BMI indicates higher risk for diabetic retinopathy");
+        }
+
+        // Calculate HbA1c
+        var hbaValue = document.getElementById('hba').value;
+        var hbaMessage = '';
+        if (hbaValue > 6.5) {
+           // hbaMessage = "HbA1c indicates higher risk for diabetic retinopathy.";
+            alert("HbA1c indicates higher risk for diabetic retinopathy.");
+        }
+
+        // Calculate Glucose (Fasting mmol/l)
+        var glucoseFastingValue = document.getElementById('glucose-fasting').value;
+        var glucoseFastingMessage = '';
+        if (glucoseFastingValue > 7) {
+           // glucoseFastingMessage = "Fasting glucose indicates higher risk for diabetic retinopathy.";
+            alert("Fasting glucose indicates higher risk for diabetic retinopathy.");
+        }
+
+        // Calculate Glucose (2-h mmol/l)
+        var glucose2hValue = document.getElementById('glucose-2h').value;
+        var glucose2hMessage = '';
+        if (glucose2hValue > 11.1) {
+           // glucose2hMessage = "2-hour glucose indicates higher risk for diabetic retinopathy.";
+           alert( "2-hour glucose indicates higher risk for diabetic retinopathy.");
+        }
+
+        // Calculate Blood Pressure (Systolic mmHg)
+        var bloodPressureSystolicValue = document.getElementById('blood-pressure-systolic').value;
+        var bloodPressureSystolicMessage = '';
+        if (bloodPressureSystolicValue > 130) {
+           // bloodPressureSystolicMessage = "Systolic blood pressure indicates higher risk for diabetic retinopathy.";
+           alert("Systolic blood pressure indicates higher risk for diabetic retinopathy");
+        }
+
+        // Calculate Blood Pressure (Diastolic mmHg)
+        var bloodPressureDiastolicValue = document.getElementById('blood-pressure-diastolic').value;
+        var bloodPressureDiastolicMessage = '';
+        if (bloodPressureDiastolicValue > 80) {
+            //bloodPressureDiastolicMessage = "Diastolic blood pressure indicates higher risk for diabetic retinopathy.";
+             alert( "Diastolic blood pressure indicates higher risk for diabetic retinopathy.");
+        }
+
+        // Print messages
+        var messages = [bmiMessage, hbaMessage, glucoseFastingMessage, glucose2hMessage, bloodPressureSystolicMessage, bloodPressureDiastolicMessage];
+        var messageString = "";
+        messages.forEach(function(message) {
+            if (message !== '') {
+                messageString += message + "\n";
+            }
+        });
+        if (messageString !== '') {
+            console.log(messageString);
+        }
+        
+    }
+    if(no){
+        console.log("enter no");
+         var visionSymptoms = [
+        document.getElementById('blurry-vision').checked,
+        document.getElementById('floating-images').checked,
+        document.getElementById('redness-eyes').checked,
+        document.getElementById('dark-spot-vision').checked
+    ];
+
+    var allSymptomsChecked = visionSymptoms.every(function(symptom) {
+        return symptom === true;
+    });
+
+     if (allSymptomsChecked) {
+        // Calculate the possibility based on all symptoms being checked
+        var possibility = calculatePossibilityForAllSymptoms();
+        alert('Possibility of having diabetic retinopathy: ' + possibility + '%');
+
+    }
+    }
+    }
+
+function calculatePossibility() {
+    var visionSymptoms = [
+        document.getElementById('blurry-vision').checked,
+        document.getElementById('floating-images').checked,
+        document.getElementById('redness-eyes').checked,
+        document.getElementById('dark-spot-vision').checked
+    ];
+
+    var allSymptomsChecked = visionSymptoms.every(function(symptom) {
+        return symptom === true;
+    });
+
+    if (allSymptomsChecked) {
+        // Calculate the possibility based on all symptoms being checked
+        var possibility = calculatePossibilityForAllSymptoms();
+        alert('Possibility of having diabetic retinopathy: ' + possibility + '%');
+
+    }
+}
+
+function calculatePossibilityForAllSymptoms() {
+    // Set the base possibility to 0
+    var possibility = 0;
+
+    // Increment the possibility for each checked symptom
+    // You can adjust the values as needed based on the importance of each symptom
+    if (document.getElementById('blurry-vision').checked) {
+        possibility += 20;
+    }
+    if (document.getElementById('floating-images').checked) {
+        possibility += 20;
+    }
+    if (document.getElementById('redness-eyes').checked) {
+        possibility += 20;
+    }
+    if (document.getElementById('dark-spot-vision').checked) {
+        possibility += 20;
+    }
+
+    return possibility;
+}
+
+   
+
+
+    function resetFields() {
+        document.getElementById('years-suffered').value = '';
+        document.getElementById('bmi').value = '';
+        document.getElementById('hba').value = '';
+        document.getElementById('glucose').value = '';
+        document.getElementById('blurry-vision').checked = false;
+        document.getElementById('floating-images').checked = false;
+        document.getElementById('redness-eyes').checked = false;
+        document.getElementById('dark-spot-vision').checked = false;
+        document.getElementById('eye-defects-input').value = '';
+    }
+</script>
+
+</body>
+</html>
+
+
+
+import base64
+import numpy as np
+import io
+from PIL import Image
+from flask import request, Flask, render_template
+import tensorflow as tf
+from keras.preprocessing.image import img_to_array
+
+# Additional imports
+import h5py
+import json
+
+# Create a Flask application instance
+app = Flask(__name__)
+
+# Function to fix layer 0 configuration in the model file
+def fix_layer0(filename, batch_input_shape, dtype):
+    with h5py.File(filename, 'r+') as f:
+        model_config = json.loads(f.attrs['model_config'])
+        layer0 = model_config['config']['layers'][0]['config']
+        layer0['batch_input_shape'] = batch_input_shape
+        layer0['dtype'] = dtype
+        f.attrs['model_config'] = json.dumps(model_config).encode('utf-8')
+
+# Function to load the Keras model
+def get_model():
+    global model, graph
+    model = tf.keras.models.load_model('cnn_model.h5')
+    print(" * Model Loaded!!")
+    graph = tf.get_default_graph()
+
+# Preprocess the image before passing it to the model
+def preprocess_image(image, target_size):
+    if image.mode != "RGB":
+        image = image.convert("RGB")
+    image = image.resize(target_size)
+    image = img_to_array(image)
+    image = np.expand_dims(image, axis=0)
+    return image
+
+# Fix layer 0 and load the model
+print(" * Loading keras model.....")
+get_model()
+
+# Define the route to render the upload form
+@app.route("/")
+def upload_form():
+    return render_template("upload.html", prediction=None)
+
+# Define a route for prediction
+@app.route("/predict", methods=["POST"])
+def predict():
+    # Get the uploaded image file
+    file = request.files['image']
+    
+    # Preprocess the image and make predictions
+    with graph.as_default(): 
+        image = Image.open(file)
+        processed_image = preprocess_image(image, target_size=(224, 224))
+        prediction = model.predict(processed_image).tolist()
+        
+        # Convert prediction to human-readable labels
+        labels = ["No Diabetic Retinopathy", "Mild Diabetic Retinopathy", 
+                  "Moderate Diabetic Retinopathy", "Severe Diabetic Retinopathy", 
+                  "Proliferative Diabetic Retinopathy"]
+        prediction_label = labels[np.argmax(prediction)]
+        
+        # Prepare and return the response JSON
+        response = {
+            'prediction': prediction_label
+        }
+        return render_template("upload.html", prediction=prediction_label)
+
+# Run the Flask application
+if __name__ == "__main__":
+    app.run(debug=True)

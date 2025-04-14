@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Hospital Recommendation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h1 {
+      color: #333;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #666;
+      text-align: center;
+    }
+
+    form {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    select {
+      padding: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+
+    button {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 5px;
+      background-color: #007bff;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 10px;
+      background-color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    li:hover {
+      background-color: #f0f0f0;
+    }
+
+    a {
+      color: inherit; /* Remove the default blue color from links */
+      text-decoration: none; /* Remove underline */
+    }
+    .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff; /* Adjust background color as needed */
+            color: #0c0b0b;
+            padding: 10px 20px;
+        }
+        .navbar {
+    overflow: hidden;
+    background-color: #000000;
+    height: 100px;
+   
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+.navbar a {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s, border-radius 0.3s; /* Added border-radius transition */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Initial glow effect */
+}
+.navbar a:hover {
+    background-color: #ffffff;
+    color: #000000;
+    transform: scale(1.05); /* Slightly scale up */
+    box-shadow: 0 0 15px rgba(255,255,255,0.7); /* Enhanced glow effect */
+    border-radius: 25px; /* Slightly increased border-radius on hover */
+}
+        .error {
+            color: red;
+        }
+        .navbar a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+  </style>
+</head>
+<body>
+   <div class="header">
+        <div>DR Vision</div>
+        <div>Contact Us</div>
+    </div>
+     <div class="navbar">
+        <a href="/home">Home</a>
+        <a href="/category">Category</a>
+        <a href="/checkup">Check-Up</a>
+        <a href="/Profile">Patient Profile</a>
+        <a href="active "href ="hospital">Hospital</a>
+        <a href="/medication">Medication</a>
+        
+    </div>
+  <h1>Medical Hospital Recommendation</h1>
+  <p>Please select your location or preference:</p>
+
+  <form id="locationForm">
+    <label for="locationSelect">Select Location:</label>
+    <select id="locationSelect">
+      <option value="Madurai">Madurai</option>
+      <option value="Chennai">Chennai</option>
+      <option value="Coimbatore">Coimbatore</option>
+      <option value="Trichy">Trichy</option>
+      <option value="Salem">Salem</option>
+      <option value="Tirunelveli">Tirunelveli</option>
+      <option value="Erode">Erode</option>
+      <option value="Tirupur">Tirupur</option>
+      <option value="Thanjavur">Thanjavur</option>
+      <option value="Vellore">Vellore</option>
+      <option value="Nagercoil">Nagercoil</option>
+      <option value="Kanchipuram">Kanchipuram</option>
+    </select>
+    <button type="button" onclick="recommendHospital()">Recommend Hospitals</button>
+  </form>
+
+  <div id="hospitalList"></div>
+
+  <script>
+    var hospitals = {
+      "Madurai": [
+        { name: "<a href='https://www.aravind.org/' target='_blank'>Aravind Eye Hospital</a>", address: "Aravind Eye Hospital,Kuruvikaran Salai, Anna Nagar, Shenoy Nagar, Madurai, Tamil Nadu 625020", contact: "0452-435-6105" },
+        { name: "Gnanam Eye Care Hospital", address: "Gnana, Eye Care Hospital,14, Bypass Rd, opp. Ganesh Priya Hospital, Ponmeni, S S Colony, Madurai, Tamil Nadu 625010", contact: "99433 01230" },
+        { name: "<a href='https://www.vasaneye.in/' target='_blank'>Vasan Eye Care Hospital</a>", address: "Vasan Eye Care Hospital,80 Feet Rd, Anna Nagar, Sathamangalam, Madurai, Tamil Nadu 625020", contact: "345-678-9012" },
+        { name: "<a href='https://meenakshimission.org/' target='_blank'>Meenakshi Mission Hospital</a>", address: "Meenakshi Mission Hospital,Lake Area, Melur Main Rd, Madurai, Tamil Nadu 625107", contact: "0452 426 3000" }
+      ],
+      "Chennai": [
+        { name: "<a href='https://www.sankaranethralaya.org/' target='_blank'>Sankara Nethralaya</a>", address: "Sankara Netralaya, 41 Old No 18, College Rd, Nungambakkam, Chennai, Tamil Nadu 600006", contact: "04442271500" },
+        { name: "<a href='https://dragarwal.com/' target='_blank'>Dr. Agarwal's Eye Hospital</a>", address: "Dr. Agarwal's Eye Hospital,222, TT Krishnamachari Rd, near Raj Park Hotel, Parthasarathypuram, Teynampet, Chennai, Tamil Nadu 600018", contact: "08048193462" },
+        { name: "<a href='https://www.vasaneye.in/' target='_blank'>Vasan Eye Care Hospital</a>", address: "Vasan Eye Care Hospital,4-50, Arcot Rd, New Colony, Valasaravakkam, Chennai, Tamil Nadu 600087", contact: "04442327763" },
+        { name: "<a href='https://www.apollohospitals.com/' target='_blank'>Apollo Hospitals</a>", address: "Apollo Hospitals,3762+QJW, Greams Ln, Thousand Lights West, Thousand Lights, Chennai, Tamil Nadu 600006", contact: "04428298282" }
+      ],
+      "Coimbatore": [
+        { name: "<a href='https://www.lotuseye.org/' target='_blank'>Lotus Eye Hospital and Institute</a>", address: "Lotus Eye Hospital and Institute,770 Sitra Road, 12, Avinashi Rd, near Passport Office, Peelamedu, Civil Aerodrome Post, Coimbatore, Tamil Nadu 641014", contact: "07397697774" },
+        { name: "<a href='https://www.sankaraeye.com/' target='_blank'>Sankara Eye Hospital</a>", address: "Sankara Eye Hospital,Srivari Kikani Centre, Dr Krishnasamy Mudaliyar Rd, next to Chinthamani Super Market, Sukrawar Pettai, R.S. Puram, Coimbatore, Tamil Nadu 641002", contact: "04224256789" },
+        { name: "<a href='https://www.kghospital.com/' target='_blank'>KG Hospital</a>", address: "KG Hospital,5, Government Arts College Rd, Opposite Court, Gopalapuram, Coimbatore, Tamil Nadu 641018", contact: "04224042121" }
+      ],
+      "Trichy": [
+        { name: "<a href='https://www.vasaneye.in/' target='_blank'>Vasan Eye Care Hospital</a>", address: "Vasan Eye Care Hospital,RMGM+G83, West Thillai Nagar, Tiruchirappalli, Tamil Nadu 620018", contact: "---------" },
+        { name: "Kavery Eye Hospital", address: "Kavery Eye Hospital,No.1, K.C.Road, Tennur, Tiruchirappalli, Tamil Nadu 620017", contact: "04314022555" },
+        { name: "City Hospital", address: "City Hospital,Thillai Nagar East, Annamalai Nagar, Woraiyur, Tiruchirappalli, Tamil Nadu 620003", contact: "08344243631" }
+      ],
+      "Salem": [
+        { name: "<a href='https://www.lotuseye.org/' target='_blank'>Lotus Eye Hospital and Institute</a>", address: "Lotus Eye Hospital and Institute,86, Brindavan Rd, Fairlands, Salem, Tamil Nadu 636016", contact: "07708111009" },
+        { name: "Gowtham Hospital", address: "Gowtham Hospital,PV2G+W9M, Jalakandapuram, Tamil Nadu 636501", contact: "-------" },
+        { name: "Kavery Hospital", address: "Kavery Hospital,9/50, Trichy Main Rd, Opp.to Chandra Mahal, M G R Nagar, Seelanaickenpatti, Salem, Tamil Nadu 636201", contact: "04272677777" }
+      ],
+      "Tirunelveli": [
+        { name: "Gomathi Hospital", address: "Gomathi Hospital,6, Trivandrum Rd, Palayamkottai, Tirunelveli, Tamil Nadu 627003", contact: "-------" },
+        { name: "KRS Hospital", address: "KRS Hospital,105, N Bypass Rd, Vannarpettai, Tirunelveli, Tamil Nadu 627003", contact: "---------" }
+      ],
+      "Erode": [
+        { name: "Nethra Eye Hospital", address: "Nethra Eye Hospital,8PR8+CRG, Municipal Colony, Edayankattuvalasu, Erode, Tamil Nadu 638011", contact: "07904914982" },
+        { name: "Vijaya Hospital", address: "Vijaya Hospital,14/2, Muthu Karuppan St, opposite to GH, Nggo Colony, Erode, Tamil Nadu 638009", contact: "09677672074" }
+      ],
+      "Tirupur": [
+        { name: "G.K. Eye Hospital", address: "G.K. Eye Hospital,14, 22, Harvey Rd, Bridge Colony, Tiruppur, Tamil Nadu 641602", contact: "304212232333" },
+        { name: "<a href='https://www.divineeye.in/' target='_blank'>Divine Eye Hospital</a>", address: "Divine Eye Hospital,Engapuzha - Kakavayal Rd, Engapuzha, Kedavur", contact: "----------" }
+      ],
+      "Thanjavur": [
+        { name: "<a href='https://www.arasaneyecare.com/' target='_blank'>Arasan Eye Hospital</a>", address: "Arasan Eye Hospital,3, Kovai Main Rd, Vaiyapuri Nagar, Green Lands, Karur, Tamil Nadu 639002", contact: "09965063799" },
+        { name: "Mano Hospital", address: "Mano Hospital,Post office Downstairs, A- 2, Ramakrishnapuram Main Rd, Karur, Tamil Nadu 639002", contact: "----------" }
+      ],
+      "Vellore": [
+        { name: "<a href='https://www.cmch-vellore.edu/' target='_blank'>Christian Medical College</a>", address: "Christian Medical College,W4FP+Q4C Christian Medical College, IDA Scudder Rd, Vellore, Tamil Nadu 632004", contact: "------------" },
+        { name: "<a href='https://www.lotuseye.org/' target='_blank'>Lotus Eye Hospital</a>", address: "Lotus Eye Hospital,28 Vellore Street, Vellore", contact: "----------" }
+      ],
+      "Nagercoil": [
+        { name: "<a href='https://www.vasaneye.in/' target='_blank'>Vasan Eye Care Hospital</a>", address: "Vasan Eye Care Hospital,NO.56/57, M.S ROAD, NEAR NAGERCOIL TENNIS CLUB, VADASERY, Nagercoil, Tamil Nadu 629001", contact: "04652398900" },
+        { name: "Joseph Eye Hospital", address: "Joseph Eye Hospital,179 A2, Ganesapuram Rd, Chidambara Nagar, Kottar, Nagercoil, Tamil Nadu 629001", contact: "------------" }
+      ],
+      "Kanchipuram": [
+        { name: "<a href='https://www.vasaneye.in/' target='_blank'>Vasan Eye Care Hospital</a>", address: "Vasan Eye Care Hospital,1, Vallal Pachaiyappan St, Ennaikaran, Kanchipuram, Tamil Nadu 631501", contact: "09360946205" },
+        { name: "Vijaya Hospital", address: "64, Kanchipuram - Chengalpattu Rd, Ennaikaran, Kanchipuram, Tamil Nadu 631501", contact: "-----------" }
+      ]
+    };
+
+    function recommendHospital() {
+      var locationSelect = document.getElementById("locationSelect");
+      var location = locationSelect.value;
+      var hospitalList = document.getElementById("hospitalList");
+      hospitalList.innerHTML = "";
+
+      if (location in hospitals) {
+        var hospitalArray = hospitals[location];
+        var ul = document.createElement("ul");
+        hospitalArray.forEach(function(hospital) {
+          var li = document.createElement("li");
+          var link = document.createElement("a");
+          link.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(hospital.address);
+          var linkText = `${hospital.name} <br> Address: ${hospital.address}, Contact: ${hospital.contact}`;
+          link.innerHTML = linkText;
+          link.target = "_blank";
+          li.appendChild(link);
+          ul.appendChild(li);
+        });
+        hospitalList.appendChild(ul);
+      } else {
+        hospitalList.textContent = "No hospitals found for this location.";
+      }
+    }
+  </script>
+</body>
+</html>

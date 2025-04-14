@@ -1,0 +1,491 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        /* Style for the navigation bar */
+        body {
+           
+            /*background-image: url(pic1.jpg);
+            height:100%;
+            width:100%;
+            background-repeat: no-repeat;
+            background-size: cover;*/
+            background-color: #ffffff;
+        }
+         .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff; /* Adjust background color as needed */
+            color: #0c0b0b;
+            padding: 10px 20px;
+        }
+        .navbar {
+    overflow: hidden;
+    background-color: #000000;
+    height: 100px;
+   
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+.navbar a {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s, border-radius 0.3s; /* Added border-radius transition */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Initial glow effect */
+}
+.navbar a:hover {
+    background-color: #ffffff;
+    color: #000000;
+    transform: scale(1.05); /* Slightly scale up */
+    box-shadow: 0 0 15px rgba(255,255,255,0.7); /* Enhanced glow effect */
+    border-radius: 25px; /* Slightly increased border-radius on hover */
+}
+        .error {
+            color: red;
+        }
+        .navbar a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        /* Style for the video */
+        #video-container {
+            position: relative;
+            margin-top: 30px;
+            width: 100%;
+            height: 400px; /* Adjust the height as needed */
+            overflow: hidden;
+        }
+        #video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+         #chat-container {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 30%;
+            height: 70%;
+            border: 1px solid #ccc;
+            overflow-y: auto;
+            background-color: white;
+            z-index: 9999;
+        }
+
+        #chat-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-color: #6cb2eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10000;
+        }
+
+        #user-input {
+            width: calc(100% - 20px);
+            margin: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        #send-button {
+            width: calc(100% - 20px);
+            margin: 10px;
+            padding: 5px;
+            background-color: #6cb2eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        h2, ul, li, p {
+            margin: 0;
+            padding: 0;
+            display: inline;
+        }
+                @keyframes slideDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background: #34495e;
+            padding: 15px;
+            position: sticky;
+            top: 60px;
+            z-index: 999;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            margin: 0 10px;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background: #1abc9c;
+            transform: scale(1.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 20px rgba(0,0,0,0.1);
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .quote-box {
+            background: #f8f9fa;
+            padding: 20px;
+            margin: 20px;
+            border-left: 5px solid #1abc9c;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            font-style: italic;
+            color: #555;
+            display: none;
+        }
+
+        .quote-box.active {
+            display: block;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div><center>DR Vision</center></div>
+        <div>Contact Us</div>
+    </div>
+    <div class="navbar">
+        <a class="active" href="#home">Home</a>
+        <a href="/category">Category</a>
+        <a href="/checkup">Check-Up</a>
+        <a href="/Profile">Patient Profile</a>
+        <a href="/hospital">Hospital</a>
+        <a href="/medication">Medication</a>
+        
+    </div>
+    <div class="container">
+        <h1>Welcome to Our Research</h1>
+        <p>Our goal is to leverage advanced AI technology to detect diabetic retinopathy at an early stage, ensuring better eye care for all.</p>
+        
+        <div class="quote-box active"> "The eyes are the windows to the soul, and they deserve the best care." </div>
+        <div class="quote-box"> "Vision is the art of seeing what is invisible to others." - Jonathan Swift </div>
+        <div class="quote-box"> "Your eyes show the strength of your soul." </div>
+        <div class="quote-box"> "Early detection saves sight. Take care of your vision today for a brighter tomorrow." </div>
+        <div class="quote-box"> "Healthy vision means a healthier life. Protect your eyes, they do so much for you." </div>
+    </div>
+  
+
+    <title>Chatbot</title>
+    
+
+    <div id="chat-toggle">Chat</div>
+    
+    <div id="chat-container">
+    <div id="chat-messages">
+        <div id="bot">Bot: Welcome! I can assist you with Stages in Diabetic Retinopathy along with its symptoms, risk factors and medications. 1.Stage 1, 2.Stage 2, 3.Stage 3, 4.Stage 4, 5.Stage 5. 6. NPDR, 7.PDR </div>
+    </div>
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button id="send-button">Send</button>
+    </div>
+    
+    <script>
+        const quotes = document.querySelectorAll('.quote-box');
+        let currentQuote = 0;
+
+        function showNextQuote() {
+            quotes[currentQuote].classList.remove('active');
+            currentQuote = (currentQuote + 1) % quotes.length;
+            quotes[currentQuote].classList.add('active');
+        }
+
+        setInterval(showNextQuote, 4000);
+    const chatToggle = document.getElementById('chat-toggle');
+    const chatContainer = document.getElementById('chat-container');
+    const chatMessages = document.getElementById('chat-messages');
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+    
+    chatToggle.addEventListener('click', toggleChat);
+    
+    sendButton.addEventListener('click', sendMessage);
+    
+    function toggleChat() {
+        chatContainer.style.display = chatContainer.style.display === 'none' ? 'block' : 'none';
+    }
+    
+    function sendMessage() {
+        const message = userInput.value.trim();
+        if (message === '') return;
+    
+        addMessage('user', message);
+        respondToMessage(message);
+    
+        userInput.value = '';
+    }
+    
+    function respondToMessage(message) {
+        let response;
+        switch (message.toLowerCase()) {
+            case '1':
+                response = 'Stage 1 - In the early stages of diabetic retinopathy, the walls of the blood vessels in your retina weaken. Tiny bulges protrude from the vessel walls, sometimes leaking or oozing fluid and blood into the retina. Tissues in the retina may swell, producing white spots in the retina.The early stages of diabetic retinopathy usually do not have any symptoms. Some people notice changes in their vision, like trouble reading or seeing faraway objects. These changes may come and go.';
+                break;
+            case '2':
+            response = `
+            <h2 >Stage 2 - Mild Non-proliferative Diabetic Retinopathy (NPDR)</h2>
+            <ul>
+                <li>Patients with mild NPDR do not need to be referred to a retina specialist unless you are concerned about or have confirmed a diagnosis of DME (Diabetic macular edema).\n</li>
+                <li>These patients should have a dilated eye examination every 12 months.\n</li>
+                <li>There is a 5% risk that mild NPDR will progress to PDR within 1 year.\n</li>
+                <li>Symptoms:
+                    <ul>
+                        <li>Swelling in small areas of blood vessels in the retina.\n</li>
+                    </ul>
+                </li>
+                <li>Treatment:
+                    <ul>
+                        <li>VEGF (Anti-vascular endothelial growth factor) injections help decrease the severity of retinopathy and lower the risk of vision complications.\n</li>
+                    </ul>
+                </li>
+            </ul>
+        `;
+        response = response.replace(/<\/?[^>]+>/g, '');
+        break;
+            case '3':
+            response = `
+            <h2>Stage 3 - Moderate Non-proliferative Diabetic Retinopathy (NPDR)</h2>
+            <ul>
+                <li>Patients with moderate NPDR have a 12% to 27% risk of developing PDR within 1 year and should be seen every 6 to 8 months.</li>
+                <li>Symptoms:
+                    <ul>
+                        <li>Some of the blood vessels in the retina will become blocked leading to hemorrhages.</li>
+                    </ul>
+                </li>
+                <li>Treatment:
+                    <ul>
+                        <li>Anti-VEGF (Vascular endothelial growth factor) injections help decrease the severity of retinopathy and lower the risk of vision complications.</li>
+                    </ul>
+                </li>
+            </ul>
+        `;
+        response = response.replace(/<\/?[^>]+>/g, '');
+        break;
+            case '4':
+            response = `
+            <h2>Stage 4 - Severe Non-proliferative Diabetic Retinopathy (NPDR)</h2>
+            <ul>
+                <li>Patients with severe NPDR have a 52% risk of developing PDR within 1 year.</li>
+                <li>They are at a high risk of disease progression and permanent vision loss.</li>
+                <li>They are most likely experiencing neuropathy elsewhere.</li>
+                <li>Symptoms:
+                    <ul>
+                        <li>More blocked blood vessels, which lead to areas of the retina no longer receiving adequate blood flow.</li>
+                    </ul>
+                </li>
+                <li>Treatment:
+                    <ul>
+                        <li>VEGF (Anti-vascular endothelial growth factor) injections help decrease the severity of retinopathy and lower the risk of vision complications.</li>
+                    </ul>
+                </li>
+            </ul>
+        `;
+        response = response.replace(/<\/?[^>]+>/g, '');
+        break;
+            case '5':
+            response = `
+            <h2>Stage 5 - Proliferative Diabetic Retinopathy (PDR)</h2>
+            <ul>
+                <li>These patients require immediate referral to a retina specialist for further testing and treatment.</li>
+                <li>They may be seen every 6 to 12 months and be monitored by a retina specialist monthly.</li>
+                <li>Treatment:
+                    <ul>
+                        <li>Laser photocoagulation of the peripheral retina known as panretinal photocoagulation (PRP).</li>
+                        <li>Surgery in cases of the proliferative disease is advanced and there is blood filling the eye (and preventing application of laser) or scar tissue that wrinkles the retina or pulls it off the eyewall.</li>
+                    </ul>
+                </li>
+            </ul>
+        `;
+        response = response.replace(/<\/?[^>]+>/g, '');
+        break;
+                case '6':
+    response = `
+        <h2>NPDR (Non Proliferative Diabetic Retinopathy)</h2>
+        <ul>
+            <li>Symptoms:
+                <ul>
+                    <li>Blurred vision/ loss of vision</li>
+                    <li>Seeing floaters or dark spots</li>
+                    <li>Difficulty seeing at night</li>
+                    <li>Difficulty distinguishing colors</li>
+                </ul>
+            </li>
+            <li>Risk factors:
+                <ul>
+                    <li>Diabetes (longer duration)</li>
+                    <li>High blood pressure</li>
+                    <li>High cholesterol</li>
+                </ul>
+            </li>
+            <li>Diagnosis of Non Proliferative Diabetic Retinopathy:
+                <ul>
+                    <li>Visual acuity testing: This measures a person’s vision.</li>
+                    <li>Tonometry: This test measures pressure inside the eye.</li>
+                    <li>Pupil dilation: Drops placed on the eye’s surface widen the pupil, allowing a physician to examine the retina and optic nerve.</li>
+                    <li>Comprehensive dilated eye exam: It allows the doctor to check the retina for:
+                        <ul>
+                            <li>Changes to blood vessels or leaking blood vessels</li>
+                            <li>Fatty deposits</li>
+                            <li>Swelling of the macula (Diabetic macular edema)</li>
+                            <li>Changes in the lens</li>
+                            <li>Damage to nerve tissue</li>
+                        </ul>
+                    </li>
+                    <li>Optical coherence tomography (OCT): It uses light waves to produce images of the retina to assess the amount of fluid.</li>
+                    <li>Fundus fluorescein angiography (FFA): During this test, your doctor will inject a dye into your arm, allowing them to track how the blood flows in your eye. They’ll take pictures of the dye circulating inside of your eye to determine which vessels are blocked, leaking, or broken.</li>
+                </ul>
+            </li>
+            <li>Non Proliferative Diabetic Retinopathy Treatment:
+                <ul>
+                    <li>The goal of any treatment is to slow or stop the progression of the disease.</li>
+                    <li>In the early stages of non-proliferative diabetic retinopathy, regular monitoring may be the only treatment.</li>
+                    <li>Diet and exercise and controlling blood sugar levels can help control the progression of the disease.</li>
+                    <li>Laser: If the disease advances, the blood vessels can leak blood and fluid into the retina, leading to macular edema. Laser treatment can stop this leakage.
+                        <ul>
+                            <li>Focal laser photocoagulation involves using a laser to target a specific leaky vessel in the macula to keep macular edema from worsening.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>Prevention:
+                <ul>
+                    <li>If you are diagnosed with diabetes, it is important to do the following:</li>
+                    <li>Get regular eye exams and physical checkups.</li>
+                    <li>Keep your blood sugar, cholesterol, and blood pressure at healthy levels.</li>
+                    <li>Be mindful of any changes you may notice in your vision, and discuss them with your doctor.</li>
+                    <li>Timely treatment and appropriate follow-ups are important, Regular exercise.</li>
+                </ul>
+            </li>
+        </ul>
+    `;
+    response = response.replace(/<\/?[^>]+>/g, '');
+    break;
+        case '7':
+        response = `
+            <h2>Symptoms of Proliferative Diabetic Retinopathy</h2>
+            <ul>
+                <li>Blurred vision/loss of vision</li>
+                <li>Seeing floaters or dark spots</li>
+                <li>Pain, redness</li>
+            </ul>
+
+            <h2>Proliferative Diabetic Retinopathy Risk Factors</h2>
+            <ul>
+                <li>Diabetes: The longer a person has diabetes, the more likely he or she is to develop diabetic retinopathy, particularly if the diabetes is poorly controlled.</li>
+                <li>Other medical conditions like high blood pressure and high cholesterol increase the risk</li>
+                <li>Pregnancy: Pregnant women face a higher risk for developing diabetes and diabetic retinopathy.</li>
+                <li>Heredity</li>
+                <li>Sedentary lifestyle</li>
+                <li>Diet</li>
+                <li>Obesity</li>
+            </ul>
+
+            <h2>Proliferative Diabetic Retinopathy Diagnosis</h2>
+            <ul>
+                <li>Visual acuity testing: This eye chart test measures a person’s vision</li>
+                <li>Tonometry: This test measures pressure inside the eye</li>
+                <li>Pupil dilation: Drops placed on the eye’s surface widen the pupil, allowing a physician to examine the retina and optic nerve</li>
+                <li>Comprehensive dilated eye exam: It allows the doctor to check the retina for:
+                    <ul>
+                        <li>Changes to blood vessels or leaking blood vessels and new vessels</li>
+                        <li>Fatty deposits</li>
+                        <li>Swelling of the macula (Diabetic macular edema)</li>
+                        <li>Changes in the lens</li>
+                        <li>Damage to nerve tissue</li>
+                    </ul>
+                </li>
+                <li>Optical coherence tomography (OCT): It uses light waves to produce images of the retina to assess the amount of fluid</li>
+                <li>Fundus fluorescein angiography (FFA): During this test, your doctor will inject a dye into your arm, allowing them to track how the blood flows in your eye. They’ll take pictures of the dye circulating inside of your eye to determine which vessels are blocked, leaking, or broken</li>
+                <li>B Scan Ultrasonography: It uses ultrasound waves to image the eye when there is no view of the retina due to vitreous hemorrhage</li>
+            </ul>
+
+            <h2>Proliferative Diabetic Retinopathy Prevention</h2>
+            <ul>
+                <li>Get regular eye exams and physical checkups</li>
+                <li>Keep your blood sugar, cholesterol, and blood pressure at healthy levels</li>
+                <li>Be mindful of any changes you may notice in your vision, and discuss them with your doctor</li>
+                <li>Stop smoking</li>
+                <li>Regular exercise</li>
+                <li>Timely treatment and appropriate follow-ups are important</li>
+            </ul>
+
+            <h2>Proliferative Diabetic Retinopathy Treatment</h2>
+            <ul>
+                <li>The goal of any treatment is to slow or stop the progression of the disease. Diet and exercise and controlling blood sugar levels can help control the progression of the disease</li>
+                <li><strong>Laser:</strong> Widespread blood vessel growth in the retina, which occurs in proliferative diabetic retinopathy, can be treated by creating a pattern of scattered laser burns across the retina. This causes abnormal blood vessels to shrink and disappear. With this procedure, some side vision may be lost in order to safeguard central vision</li>
+                <li><strong>Medical management:</strong> Injection of anti VEGF medication into the eye may be used in selected patients with bleeding into the eye</li>
+                <li><strong>Surgical management:</strong> Vitrectomy involves removing scar tissue and blood from the vitreous fluid of the eye</li>
+            </ul>
+            <p>If you or someone close to you has developed diabetic retinopathy, do not put off an eye test. Walk into Dr. Agarwal’s Eye Hospital for an appointment with top specialists and surgeons in the field of eye care.</p>
+        `;
+        response = response.replace(/<\/?[^>]+>/g, '');
+        break;
+        case 'Thankyou':
+            response='Welcome';
+            break;
+        default:
+            response = 'I did not understand that. Kindly ask your queries from the welcome message.';
+            break;
+        }
+        setTimeout(() => addMessage('bot', response), 1000); // Simulate bot response delay
+    }
+    
+    function addMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.textContent = `${sender}: ${message}`;
+        chatMessages.appendChild(messageElement);
+    }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 20px;
+            
+
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 25%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        .sub-topic {
+            margin-top: 10px;
+            margin-left: 20px;
+        }
+        .hidden {
+            display: none;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff; /* Adjust background color as needed */
+            color: #0c0b0b;
+            padding: 10px 20px;
+        }
+        .navbar {
+    overflow: hidden;
+    background-color: #000000;
+    height: 100px;
+   
+    display: flex;
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+.navbar a {
+    display: inline-block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s, box-shadow 0.3s, border-radius 0.3s; /* Added border-radius transition */
+    border-radius: 20px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5); /* Initial glow effect */
+}
+.navbar a:hover {
+    background-color: #ffffff;
+    color: #000000;
+    transform: scale(1.05); /* Slightly scale up */
+    box-shadow: 0 0 15px rgba(255,255,255,0.7); /* Enhanced glow effect */
+    border-radius: 25px; /* Slightly increased border-radius on hover */
+}
+        .error {
+            color: red;
+        }
+        .navbar a.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+     <div class="header">
+        <div>DR Vision</div>
+        <div>Contact Us</div>
+    </div>
+     <div class="navbar">
+        <a href="/home">Home</a>
+        <a class="active" href="#category">Category</a>
+        <a href="/checkup">Check-Up</a>
+        <a href="/Profile">Patient Profile</a>
+        <a href="/hospital">Hospital</a>
+        <a href="/medication">Medication</a>
+        
+    </div>
+
+<form action="/category" method="post">
+    <div class="form-group">
+        <label style="margin-top: 50px;">Do you have diabetes?</label>
+        <input type="radio" name="diabetes" id="diabetes-yes" value="yes"> Yes
+        <input type="radio" name="diabetes" id="diabetes-no" value="no"> No
+    </div>
+
+    <div id="diabetes-info" class="hidden">
+        <div class="form-group">
+            <label for="years-suffered">Number of years suffered from diabetes:</label>
+            <input type="text" id="years-suffered" name="years-suffered">
+        </div>
+        
+        <div class="sub-topic">
+            <label for="bmi">BMI (Body Mass Index):</label>
+            <input type="number" id="bmi" name="bmi">
+        </div>
+     
+        <div class="sub-topic">
+            <label for="hba">HBA:</label>
+            <input type="number" id="hba" name="hba">
+        </div>
+
+        <div class="sub-topic">
+            <label for="glucose">Glucose:</label>
+            <input type="number" id="glucose" name="glucose">
+        </div>
+
+        <label for="eye-defects-input">Do you have any eye defects?</label>
+        <input type="text" id="eye-defects-input" name="eye-defects">
+
+        <div class="sub-topic">
+            <label>Do you experience any of the following vision-related symptoms?</label>
+            <input type="checkbox" id="blurry-vision" name="vision-symptoms" value="blurry-vision"> Blurry vision<br>
+            <input type="checkbox" id="floating-images" name="vision-symptoms" value="floating-images"> Images floating<br>
+            <input type="checkbox" id="redness-eyes" name="vision-symptoms" value="redness-eyes"> Redness in eyes<br>
+            <input type="checkbox" id="dark-spot-vision" name="vision-symptoms" value="dark-spot-vision"> Dark spots in vision<br>
+        </div>
+    </div>
+
+    <div class="sub-topic hidden" id="eye-defects">
+        <label for="eye-defects-input">Do you have any eye defects?</label>
+        <input type="text" id="eye-defects-input2" name="eye-defects">
+        <div class="sub-topic">
+            <label>Do you experience any of the following vision-related symptoms?</label>
+            <input type="checkbox" id="blurry-vision2" name="vision-symptoms" value="blurry-vision"> Blurry vision<br>
+            <input type="checkbox" id="floating-images2" name="vision-symptoms" value="floating-images"> Images floating<br>
+            <input type="checkbox" id="redness-eyes2" name="vision-symptoms" value="redness-eyes"> Redness in eyes<br>
+            <input type="checkbox" id="dark-spot-vision2" name="vision-symptoms" value="dark-spot-vision"> Dark spots in vision<br>
+        </div>
+    </div>
+
+    <button type="submit" onclick="setDiabetesValues()" style="text-align: center;"><center>Submit</center></button>
+</form>
+
+<script>
+    document.getElementById('diabetes-info').classList.add('hidden');
+    document.getElementById('eye-defects').classList.add('hidden');
+
+    document.getElementById('diabetes-yes').addEventListener('click', function(){
+        document.getElementById('diabetes-info').classList.remove('hidden');
+        document.getElementById('eye-defects').classList.add('hidden');
+    });
+
+    document.getElementById('diabetes-no').addEventListener('click', function() {
+        document.getElementById('diabetes-info').classList.add('hidden');
+        document.getElementById('eye-defects').classList.remove('hidden');
+        resetFields();
+    });
+
+    function setDiabetesValues() {
+        let yes = document.getElementById('diabetes-yes').checked;
+        let no = document.getElementById('diabetes-no').checked;
+        
+        if (yes) {
+            document.getElementById('years-suffered').value = ''; // You need to set this value as per your application
+            
+            // Calculate BMI
+            var bmiValue = document.getElementById('bmi').value;
+            if (bmiValue < 18.5 || bmiValue > 24.9) {
+                alert("BMI indicates higher risk for diabetic retinopathy");
+            }
+
+            // Calculate HbA1c
+            var hbaValue = document.getElementById('hba').value;
+            if (hbaValue > 6.5) {
+                alert("HbA1c indicates higher risk for diabetic retinopathy.");
+            }
+
+            // Calculate Glucose
+            var glucoseValue = document.getElementById('glucose').value;
+            if (glucoseValue > 7) {
+                alert("Glucose indicates higher risk for diabetic retinopathy.");
+            }
+
+            // Calculate Blood Pressure (Systolic mmHg)
+            var bloodPressureSystolicValue = document.getElementById('blood-pressure-systolic').value;
+            if (bloodPressureSystolicValue > 130) {
+                alert("Systolic blood pressure indicates higher risk for diabetic retinopathy");
+            }
+
+            // Calculate Blood Pressure (Diastolic mmHg)
+            var bloodPressureDiastolicValue = document.getElementById('blood-pressure-diastolic').value;
+            if (bloodPressureDiastolicValue > 80) {
+                alert("Diastolic blood pressure indicates higher risk for diabetic retinopathy.");
+            }
+        }
+
+        else  {
+          var blurryVisionChecked = document.getElementById('blurry-vision2').checked;
+var floatingImagesChecked = document.getElementById('floating-images2').checked;
+var rednessEyesChecked = document.getElementById('redness-eyes2').checked;
+var darkSpotVisionChecked = document.getElementById('dark-spot-vision2').checked;
+
+var anySymptomChecked = blurryVisionChecked || floatingImagesChecked || rednessEyesChecked || darkSpotVisionChecked;
+console.log(anySymptomChecked);
+if (anySymptomChecked) {
+    var possibility = calculatePossibilityForAllSymptoms();
+    alert('Possibility of having diabetic retinopathy: ' + possibility + '%');
+}
+
+
+            
+        }
+    }
+
+    function calculatePossibilityForAllSymptoms() {
+        // Set the base possibility to 0
+        var possibility = 0;
+
+        // Increment the possibility for each checked symptom
+        // You can adjust the values as needed based on the importance of each symptom
+        if (document.getElementById('blurry-vision2').checked) {
+            possibility += 20;
+        }
+        if (document.getElementById('floating-images2').checked) {
+            possibility += 20;
+        }
+        if (document.getElementById('redness-eyes2').checked) {
+            possibility += 20;
+        }
+        if (document.getElementById('dark-spot-vision2').checked) {
+            possibility += 20;
+        }
+
+        return possibility;
+    }
+
+    function resetFields() {
+        document.getElementById('years-suffered').value = '';
+        document.getElementById('bmi').value = '';
+        document.getElementById('hba').value = '';
+        document.getElementById('glucose').value = '';
+        document.getElementById('blurry-vision').checked = false;
+        document.getElementById('floating-images').checked = false;
+        document.getElementById('redness-eyes').checked = false;
+        document.getElementById('dark-spot-vision').checked = false;
+        document.getElementById('eye-defects-input').value = '';
+    }
+</script>
+
+</body>
+</html>
